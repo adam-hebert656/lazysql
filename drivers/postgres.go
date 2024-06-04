@@ -58,7 +58,7 @@ func (db *Postgres) GetDatabases() (databases []string, err error) {
 func (db *Postgres) GetTables(database string) (tables map[string][]string, err error) {
 	tables = make(map[string][]string)
 
-	rows, err := db.Connection.Query(fmt.Sprintf("SELECT table_name, table_schema FROM information_schema.tables WHERE table_catalog = '%s'", database))
+	rows, err := db.Connection.Query(fmt.Sprintf("SELECT table_name, table_schema FROM information_schema.tables WHERE table_catalog = '%s' ORDER BY table_name DESC", database))
 	if err != nil {
 		return tables, err
 	}
